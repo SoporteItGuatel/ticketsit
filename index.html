@@ -224,8 +224,8 @@
   <div>Sistema desarrollado para supervisión y gestión institucional de IT • GUATEL</div>
 </footer>
 
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
 <script>
   const firebaseConfig = {
@@ -238,27 +238,28 @@
   };
 
   // Initialize Firebase
-  const app = firebase.initializeApp(firebaseConfig);
+ const app = firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
   async function obtenerSiguienteCorrelativo() {
     const docRef = db.collection('config').doc('contadorTicket');
     try {
-      return db.runTransaction(async (transaction) => {
+      return await db.runTransaction(async (transaction) => {
         const doc = await transaction.get(docRef);
-        let nuevoNumero = 957; // Valor inicial
+        let nuevoNumero = 957; 
         if (doc.exists) {
           const data = doc.data();
-          if (data.ultimoCorrelativo && data.ultimoCorrelativo >= 957 && data.ultimoCorrelativo < 999) {
-            nuevoNumero = data.ultimoCorrelativo + 1;
+          let ultimo = Number(data.ultimoCorrelativo);
+          if (!isNaN(ultimo) && ultimo >= 957) {
+            nuevoNumero = ultimo + 1;
           }
         }
         transaction.set(docRef, { ultimoCorrelativo: nuevoNumero });
         return `DT-IT-${String(nuevoNumero).padStart(3, '0')}`;
       });
     } catch (error) {
-      console.error("Error en transacción Firestore:", error);
-      throw error;
+      console.error("Error en transacción:", error);
+      return `DT-IT-957`;
     }
   }
 
@@ -270,9 +271,8 @@
   const form = document.getElementById('ticketForm');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const btn = document.getElementById('btnEnviar');
-    btn.innerText = "Registrando solicitud...";
+    btn.innerText = "Registrando...";
     btn.disabled = true;
 
     const nroTicket = document.getElementById('numeroTicketInput').value;
@@ -290,12 +290,12 @@
 
     try {
       await db.collection('ticketsSoporte').add(nuevoTicket);
-
       document.getElementById('textoFolio').innerText = nroTicket;
       form.style.display = 'none';
       document.getElementById('mensaje-exito').style.display = 'block';
     } catch (error) {
-      alert("Hubo un error al registrar la solicitud. Por favor intente de nuevo.");
+      console.error(error);
+      alert("Error al registrar. Intente de nuevo.");
       btn.innerText = "Generar Solicitud de Soporte";
       btn.disabled = false;
     }

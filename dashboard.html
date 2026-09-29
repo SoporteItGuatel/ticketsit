@@ -547,8 +547,8 @@
         </footer>
     </div>
 
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
 <script>
   const firebaseConfig = {
@@ -567,7 +567,7 @@
   let estadoFiltroActual = 'Todos';
 
   function cargarHelpdesk() {
-    db.collection('ticketsSoporte').orderBy('fecha', 'desc').get()
+    db.collection('ticketsSoporte').get()
       .then(querySnapshot => {
         ticketsGlobales = [];
         querySnapshot.forEach(doc => {

@@ -231,8 +231,8 @@
     <div>Sistema desarrollado para supervisión y gestión institucional de IT • GUATEL</div>
 </footer>
 
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
 <script>
   const firebaseConfig = {
@@ -247,9 +247,10 @@
   const app = firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  function cargarTickets() {
-    db.collection('ticketsSoporte').orderBy('fecha', 'desc').get()
-      .then(querySnapshot => {
+ function cargarTickets() {
+  db.collection('ticketsSoporte').get()
+    .then(querySnapshot => {
+      // ... resto del código
         const ticketsGuardados = [];
         querySnapshot.forEach(doc => {
           ticketsGuardados.push({idDoc: doc.id, ...doc.data()});
