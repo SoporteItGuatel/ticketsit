@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Solicitudes de Soporte</title>
+    <style>
+        /* Definición de Variables según el tema del dispositivo del usuario */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0f172a;
+                --card-bg: #1e293b;
+                --text-main: #f8fafc;
+                --text-muted: #94a3b8;
+                --primary: #38bdf8;
+                --primary-hover: #0ea5e9;
+                --border-color: #334155;
+                --table-hover: #1a2536;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-color: #f4f6f9;
+                --card-bg: #ffffff;
+                --text-main: #333333;
+                --text-muted: #666666;
+                --primary: #0056b3;
+                --primary-hover: #004494;
+                --border-color: #dee2e6;
+                --table-hover: #f8f9fa;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            font-size: 16px;
+            display: flex;
+            flex-direction: column;
+            min-height: 90vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+            flex-grow: 1;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 26px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .acciones-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-pdf {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-pdf:hover {
+            background-color: #c82333;
+        }
+
+        .btn-volver {
+            background-color: var(--border-color);
+            color: var(--text-main);
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-volver:hover {
+            opacity: 0.8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 14px 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--border-color);
+            color: var(--text-main);
+            font-size: 15px;
+        }
+
+        tr:hover {
+            background-color: var(--table-hover);
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 13px;
+            display: inline-block;
+        }
+        .badge-leve { background-color: rgba(40, 167, 69, 0.2); color: #28a745; }
+        .badge-medio { background-color: rgba(255, 193, 7, 0.2); color: #ffc107; }
+        .badge-urgente { background-color: rgba(220, 53, 69, 0.2); color: #dc3545; }
+
+        .select-estado {
+            padding: 6px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        /* --- PIE DE PÁGINA CON LOGOTIPO Y AUTORÍA --- */
+        .system-footer {
+            max-width: 1200px;
+            margin: 40px auto 10px auto;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        .footer-logo-img {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        @media print {
+            body { background: white !important; color: black !important; padding: 0; }
+            .container { box-shadow: none; border: none; margin: 0; max-width: 100%; padding: 0; }
+            .acciones-bar, .select-estado { display: none; }
+            th { background-color: #eee !important; color: #000 !important; -webkit-print-color-adjust: exact; }
+            .system-footer { border-top: 2px solid #333; color: #333; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Gestión y Registro de Solicitudes</h2>
+    <p class="subtitle">Panel de control de IT para supervisar y actualizar el estado de los reportes.</p>
+
+    <div class="acciones-bar">
+        <a href="index.html" class="btn-volver">← Volver al Formulario</a>
+        <button class="btn-pdf" onclick="window.print()">🖨️ Descargar / Guardar Reporte en PDF</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Ticket</th>
+                <th>Fecha</th>
+                <th>Solicitante / Área</th>
+                <th>Inventario</th>
+                <th>Urgencia</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody id="tabla-cuerpo">
+            <!-- Los datos se cargan dinámicamente -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Pie de página con tu logotipo y autoría -->
+<footer class="system-footer">
+    <div class="footer-brand">
+        <img src="logo.jpeg" alt="Logo" class="footer-logo-img">
+        <span>Marvin Leonel Luna Garcia</span>
+    </div>
+    <div>Sistema desarrollado para supervisión y gestión institucional de IT • GUATEL</div>
+</footer>
+
+<script>
+    function cargarTickets() {
+        const ticketsGuardados = JSON.parse(localStorage.getItem('ticketsSoporte')) || [];
+        const tbody = document.getElementById('tabla-cuerpo');
+        
+        if (ticketsGuardados.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 30px;">No hay solicitudes registradas todavía.</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = '';
+        ticketsGuardados.forEach((t, index) => {
+            let badgeClass = 'badge-leve';
+            if (t.urgencia === 'Medio') badgeClass = 'badge-medio';
+            if (t.urgencia === 'Urgente') badgeClass = 'badge-urgente';
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><strong>${t.id || 'S/N'}</strong></td>
+                <td>${t.fecha || 'Reciente'}</td>
+                <td><strong>${t.nombre}</strong><br><small style="color:var(--text-muted);">${t.depto}</small></td>
+                <td><code>${t.inventario || 'N/A'}</code></td>
+                <td><span class="badge ${badgeClass}">${t.urgencia}</span></td>
+                <td>${t.descripcion}</td>
+                <td>
+                    <select class="select-estado" onchange="cambiarEstado(${index}, this.value)">
+                        <option value="Pendiente" ${t.estado === 'Pendiente' ? 'selected' : ''}>⏳ Pendiente</option>
+                        <option value="En Proceso" ${t.estado === 'En Proceso' ? 'selected' : ''}>🛠️ En Proceso</option>
+                        <option value="Resuelto" ${t.estado === 'Resuelto' ? 'selected' : ''}>✅ Resuelto</option>
+                    </select>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function cambiarEstado(index, nuevoEstado) {
+        let tickets = JSON.parse(localStorage.getItem('ticketsSoporte')) || [];
+        if (tickets[index]) {
+            tickets[index].estado = nuevoEstado;
+            localStorage.setItem('ticketsSoporte', JSON.stringify(tickets));
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', cargarTickets);
+</script>
+
+</body>
+</html>
