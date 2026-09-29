@@ -1,295 +1,307 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Gestión de Incidencias IT — GUATEL</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f6f9;
-            color: #333333;
-            margin: 0;
-            padding: 20px;
-            font-size: 16px;
-            display: flex;
-            flex-direction: column;
-            min-height: 90vh;
-        }
-        .container {
-            max-width: 650px;
-            margin: 20px auto;
-            background: #ffffff;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid #dee2e6;
-            flex-grow: 1;
-            box-sizing: border-box;
-        }
-        h2 {
-            text-align: center;
-            color: #0056b3;
-            font-size: 24px;
-            margin-bottom: 5px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-        p.subtitle {
-            text-align: center;
-            color: #666666;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-        label {
-            display: block;
-            margin-top: 20px;
-            font-weight: 600;
-            color: #333333;
-            font-size: 14px;
-        }
-        input[type="text"], select, textarea, input[type="file"] {
-            width: 100%;
-            padding: 12px 14px;
-            margin-top: 6px;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            font-size: 15px;
-            box-sizing: border-box;
-            background-color: #ffffff;
-            color: #333333;
-        }
-        input:focus, select:focus, textarea:focus {
-            border-color: #0056b3;
-            outline: none;
-        }
-        input[type="file"] {
-            padding: 10px;
-            cursor: pointer;
-        }
-        .nota-archivo {
-            font-size: 13px;
-            color: #666666;
-            margin-top: 5px;
-        }
-        .leyenda-urgencia {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-top: 8px;
-            font-size: 13px;
-            color: #666666;
-        }
-        .leyenda-urgencia div {
-            margin-bottom: 4px;
-        }
-        .leyenda-urgencia div:last-child {
-            margin-bottom: 0;
-        }
-        button {
-            width: 100%;
-            background-color: #0056b3;
-            color: white;
-            border: none;
-            padding: 14px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 30px;
-            transition: background 0.2s;
-        }
-        button:hover {
-            background-color: #004494;
-        }
-        #mensaje-exito {
-            display: none;
-            background-color: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-            border: 2px solid #10b981;
-            padding: 25px;
-            border-radius: 10px;
-            text-align: center;
-            margin-top: 20px;
-        }
-        #mensaje-exito h3 {
-            font-size: 22px;
-            margin: 0 0 10px 0;
-        }
-        .folio-box {
-            background: #ffffff;
-            padding: 10px;
-            border: 2px dashed #10b981;
-            font-size: 20px;
-            font-weight: bold;
-            color: #10b981;
-            margin: 15px 0;
-            border-radius: 6px;
-        }
-        .system-footer {
-            max-width: 650px;
-            margin: 40px auto 10px auto;
-            text-align: center;
-            padding: 20px;
-            border-top: 1px solid #dee2e6;
-            color: #666666;
-            font-size: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            box-sizing: border-box;
-            width: 100%;
-        }
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: bold;
-            color: #333333;
-            justify-content: center;
-        }
-        .footer-logo-img {
-            max-width: 20px;
-            height: auto;
-            display: block;
-            border-radius: 4px;
-        }
-        @media print {
-            body { background: white !important; color: black !important; padding: 0; }
-            .container { box-shadow: none; border: none; }
-            .system-footer { border-top: 2px solid #333; color: #333; }
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gestión de Incidencias IT — GUATEL</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333333;
+    margin: 0;
+    padding: 20px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+  }
+  .container {
+    max-width: 650px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid #dee2e6;
+    flex-grow: 1;
+    box-sizing: border-box;
+  }
+  h2 {
+    text-align: center;
+    color: #0056b3;
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  p.subtitle {
+    text-align: center;
+    color: #666666;
+    margin-bottom: 30px;
+    font-size: 14px;
+  }
+  label {
+    display: block;
+    margin-top: 20px;
+    font-weight: 600;
+    color: #333333;
+    font-size: 14px;
+  }
+  input[type="text"], select, textarea, input[type="file"] {
+    width: 100%;
+    padding: 12px 14px;
+    margin-top: 6px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 15px;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #333;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: #0056b3;
+    outline: none;
+  }
+  input[type="file"] {
+    padding: 10px;
+    cursor: pointer;
+  }
+  .nota-archivo {
+    font-size: 13px;
+    color: #666;
+    margin-top: 5px;
+  }
+  .leyenda-urgencia {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #666;
+  }
+  .leyenda-urgencia div {
+    margin-bottom: 4px;
+  }
+  .leyenda-urgencia div:last-child {
+    margin-bottom: 0;
+  }
+  button {
+    width: 100%;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background 0.2s;
+  }
+  button:hover {
+    background-color: #004494;
+  }
+  #mensaje-exito {
+    display: none;
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 2px solid #10b981;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  #mensaje-exito h3 {
+    font-size: 22px;
+    margin: 0 0 10px 0;
+  }
+  .folio-box {
+    background: #fff;
+    padding: 10px;
+    border: 2px dashed #10b981;
+    font-size: 20px;
+    font-weight: bold;
+    color: #10b981;
+    margin: 15px 0;
+    border-radius: 6px;
+  }
+  .system-footer {
+    max-width: 650px;
+    margin: 40px auto 10px auto;
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #dee2e6;
+    color: #666;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    color: #333;
+    justify-content: center;
+  }
+  .footer-logo-img {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+  }
+</style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Gestión de Incidencias IT</h2>
-    <p class="subtitle">Complete el formulario para registrar una solicitud formal de soporte técnico.</p>
+  <h2>Gestión de Incidencias IT</h2>
+  <p class="subtitle">Complete el formulario para registrar una solicitud formal de soporte técnico.</p>
 
-    <form id="ticketForm">
-        <input type="hidden" id="numeroTicketInput" name="Numero_de_Ticket" />
+  <form id="ticketForm">
+    <input type="hidden" id="numeroTicketInput" name="Numero_de_Ticket" />
 
-        <label for="nombre">Nombre del Solicitante:</label>
-        <input type="text" id="nombre" name="nombre" required placeholder="Ej. Juan Pérez" />
+    <label for="nombre">Nombre del Solicitante:</label>
+    <input type="text" id="nombre" name="nombre" required placeholder="Ej. Juan Pérez" />
 
-        <label for="depto">Dirección o Departamento:</label>
-        <select id="depto" name="direccion" required>
-            <option value="">Seleccione su área institucional...</option>
-            <option value="Direccion Administrativa">Dirección Administrativa</option>
-            <option value="Direccion Comercial">Dirección Comercial</option>
-            <option value="Direccion Financiera">Dirección Financiera</option>
-            <option value="Direccion Tecnica">Dirección Técnica</option>
-            <option value="Unidad de Auditoria Interna">Unidad de Auditoría Interna</option>
-            <option value="Asesoria Juridica">Asesoría Jurídica</option>
-            <option value="Gerencia">Gerencia</option>
-            <option value="SubGerencia">SubGerencia</option>
-        </select>
+    <label for="depto">Dirección o Departamento:</label>
+    <select id="depto" name="direccion" required>
+      <option value="">Seleccione su área institucional...</option>
+      <option value="Direccion Administrativa">Dirección Administrativa</option>
+      <option value="Direccion Comercial">Dirección Comercial</option>
+      <option value="Direccion Financiera">Dirección Financiera</option>
+      <option value="Direccion Tecnica">Dirección Técnica</option>
+      <option value="Unidad de Auditoria Interna">Unidad de Auditoría Interna</option>
+      <option value="Asesoria Juridica">Asesoría Jurídica</option>
+      <option value="Gerencia">Gerencia</option>
+      <option value="SubGerencia">SubGerencia</option>
+    </select>
 
-        <label for="inventario">Número de Inventario del Equipo (Hardware/Activo):</label>
-        <input type="text" id="inventario" name="inventario" required placeholder="Ej. INV-04521" />
+    <label for="inventario">Número de Inventario del Equipo (Hardware/Activo):</label>
+    <input type="text" id="inventario" name="inventario" required placeholder="Ej. INV-04521" />
 
-        <label for="urgencia">Nivel de Prioridad / Urgencia:</label>
-        <select id="urgencia" name="urgencia" required>
-            <option value="">Seleccione una prioridad...</option>
-            <option value="Leve">Leve</option>
-            <option value="Medio">Medio</option>
-            <option value="Urgente">Urgente</option>
-        </select>
+    <label for="urgencia">Nivel de Prioridad / Urgencia:</label>
+    <select id="urgencia" name="urgencia" required>
+      <option value="">Seleccione una prioridad...</option>
+      <option value="Leve">Leve</option>
+      <option value="Medio">Medio</option>
+      <option value="Urgente">Urgente</option>
+    </select>
 
-        <div class="leyenda-urgencia">
-            <div>🟢 <strong>Leve:</strong> Consulta general o incidencia de impacto menor.</div>
-            <div>🟡 <strong>Medio:</strong> Degradación parcial del servicio, operación semi-continua.</div>
-            <div>🔴 <strong>Urgente:</strong> Interrupción total de operaciones o falla crítica de equipos.</div>
-        </div>
-
-        <label for="descripcion">Descripción Detallada de la Incidencia:</label>
-        <textarea id="descripcion" name="descripcion" rows="4" required placeholder="Describa el inconveniente técnico presentado..."></textarea>
-
-        <label for="adjunto">Evidencia Fotográfica o Captura (Opcional):</label>
-        <input type="file" id="adjunto" name="adjunto" accept="image/*" />
-        <div class="nota-archivo">Adjunte archivo gráfico si la incidencia lo requiere.</div>
-
-        <button type="submit" id="btnEnviar">Generar Solicitud de Soporte</button>
-    </form>
-
-    <div id="mensaje-exito" style="display:none;">
-        <h3>¡Solicitud Registrada Exitosamente!</h3>
-        <p style="margin: 5px 0;">Su número de ticket asignado para seguimiento es:</p>
-        <div class="folio-box" id="textoFolio">DT-IT-000</div>
-        <p style="font-size: 14px; margin: 0;">El departamento de IT ha recibido su reporte y procederá a su atención.</p>
+    <div class="leyenda-urgencia">
+      <div>🟢 <strong>Leve:</strong> Consulta general o incidencia de impacto menor.</div>
+      <div>🟡 <strong>Medio:</strong> Degradación parcial del servicio, operación semi-continua.</div>
+      <div>🔴 <strong>Urgente:</strong> Interrupción total de operaciones o falla crítica de equipos.</div>
     </div>
+
+    <label for="descripcion">Descripción Detallada de la Incidencia:</label>
+    <textarea id="descripcion" name="descripcion" rows="4" required placeholder="Describa el inconveniente técnico presentado..."></textarea>
+
+    <label for="adjunto">Evidencia Fotográfica o Captura (Opcional):</label>
+    <input type="file" id="adjunto" name="adjunto" accept="image/*" />
+    <div class="nota-archivo">Adjunte archivo gráfico si la incidencia lo requiere.</div>
+
+    <button type="submit" id="btnEnviar">Generar Solicitud de Soporte</button>
+  </form>
+
+  <div id="mensaje-exito" style="display:none;">
+    <h3>¡Solicitud Registrada Exitosamente!</h3>
+    <p style="margin: 5px 0;">Su número de ticket asignado para seguimiento es:</p>
+    <div class="folio-box" id="textoFolio">DT-IT-000</div>
+    <p style="font-size: 14px; margin: 0;">El departamento de IT ha recibido su reporte y procederá a su atención.</p>
+  </div>
 </div>
 
 <footer class="system-footer">
-    <div class="footer-brand">
-        <img src="logo.jpeg" alt="Logo" class="footer-logo-img" />
-        <span>Marvin Leonel Luna Garcia</span>
-    </div>
-    <div>Sistema desarrollado para supervisión y gestión institucional de IT • GUATEL</div>
+  <div class="footer-brand">
+    <img src="logo.jpeg" alt="Logo" class="footer-logo-img" />
+    <span>Marvin Leonel Luna Garcia</span>
+  </div>
+  <div>Sistema desarrollado para supervisión y gestión institucional de IT • GUATEL</div>
 </footer>
 
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"></script>
 
 <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyCzn27eEKxuPL2LqKac9F_Bn1kJV4jPaFE",
-      authDomain: "ticketsit-6a11f.firebaseapp.com",
-      projectId: "ticketsit-6a11f",
-      storageBucket: "ticketsit-6a11f.firebasestorage.app",
-      messagingSenderId: "495722204239",
-      appId: "1:495722204239:web:13e1f8e0c8978828e5ae3a"
-    };
-    
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+  const firebaseConfig = {
+    apiKey: "AIzaSyCzn27eEKxuPL2LqKac9F_Bn1kJV4jPaFE",
+    authDomain: "ticketsit-6a11f.firebaseapp.com",
+    projectId: "ticketsit-6a11f",
+    storageBucket: "ticketsit-6a11f.firebasestorage.app",
+    messagingSenderId: "495722204239",
+    appId: "1:495722204239:web:13e1f8e0c8978828e5ae3a"
+  };
 
-    function obtenerSiguienteCorrelativo() {
-      let ultimoNumero = parseInt(localStorage.getItem('ultimoCorrelativoIT'));
-      if (isNaN(ultimoNumero) || ultimoNumero < 956 || ultimoNumero >= 999) {
-          ultimoNumero = 956;
-      }
-      let nuevoNumero = ultimoNumero + 1;
-      localStorage.setItem('ultimoCorrelativoIT', nuevoNumero);
-      return `DT-IT-${String(nuevoNumero).padStart(3, '0')}`;
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  async function obtenerSiguienteCorrelativo() {
+    const docRef = db.collection('config').doc('contadorTicket');
+    try {
+      return db.runTransaction(async (transaction) => {
+        const doc = await transaction.get(docRef);
+        let nuevoNumero = 957; // Valor inicial
+        if (doc.exists) {
+          const data = doc.data();
+          if (data.ultimoCorrelativo && data.ultimoCorrelativo >= 957 && data.ultimoCorrelativo < 999) {
+            nuevoNumero = data.ultimoCorrelativo + 1;
+          }
+        }
+        transaction.set(docRef, { ultimoCorrelativo: nuevoNumero });
+        return `DT-IT-${String(nuevoNumero).padStart(3, '0')}`;
+      });
+    } catch (error) {
+      console.error("Error en transacción Firestore:", error);
+      throw error;
     }
+  }
 
-    const nroTicket = obtenerSiguienteCorrelativo();
+  async function inicializarFormulario() {
+    const nroTicket = await obtenerSiguienteCorrelativo();
     document.getElementById('numeroTicketInput').value = nroTicket;
+  }
 
-    const form = document.getElementById('ticketForm');
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const btn = document.getElementById('btnEnviar');
-      btn.innerText = "Registrando solicitud...";
-      btn.disabled = true;
+  const form = document.getElementById('ticketForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-      const nuevoTicket = {
-        id: nroTicket,
-        nombre: document.getElementById('nombre').value,
-        depto: document.getElementById('depto').value,
-        inventario: document.getElementById('inventario').value,
-        urgencia: document.getElementById('urgencia').value,
-        descripcion: document.getElementById('descripcion').value,
-        estado: 'Pendiente',
-        fecha: new Date().toLocaleString()
-      };
+    const btn = document.getElementById('btnEnviar');
+    btn.innerText = "Registrando solicitud...";
+    btn.disabled = true;
 
-      db.collection('ticketsSoporte').add(nuevoTicket)
-        .then(() => {
-          document.getElementById('textoFolio').innerText = nroTicket;
-          form.style.display = 'none';
-          document.getElementById('mensaje-exito').style.display = 'block';
-        })
-        .catch(error => {
-          alert("Hubo un error al registrar la solicitud. Por favor intente de nuevo.");
-          btn.innerText = "Generar Solicitud de Soporte";
-          btn.disabled = false;
-        });
-    });
+    const nroTicket = document.getElementById('numeroTicketInput').value;
+
+    const nuevoTicket = {
+      id: nroTicket,
+      nombre: document.getElementById('nombre').value,
+      depto: document.getElementById('depto').value,
+      inventario: document.getElementById('inventario').value,
+      urgencia: document.getElementById('urgencia').value,
+      descripcion: document.getElementById('descripcion').value,
+      estado: 'Pendiente',
+      fecha: new Date().toLocaleString()
+    };
+
+    try {
+      await db.collection('ticketsSoporte').add(nuevoTicket);
+
+      document.getElementById('textoFolio').innerText = nroTicket;
+      form.style.display = 'none';
+      document.getElementById('mensaje-exito').style.display = 'block';
+    } catch (error) {
+      alert("Hubo un error al registrar la solicitud. Por favor intente de nuevo.");
+      btn.innerText = "Generar Solicitud de Soporte";
+      btn.disabled = false;
+    }
+  });
+
+  window.addEventListener('DOMContentLoaded', inicializarFormulario);
 </script>
 
 </body>
