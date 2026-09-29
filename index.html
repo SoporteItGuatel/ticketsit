@@ -1,136 +1,95 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Gestión de Incidencias IT — GUATEL</title>
     <style>
-        /* Definición de Variables según el tema del dispositivo del usuario */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #0f172a;
-                --card-bg: #1e293b;
-                --text-main: #f8fafc;
-                --text-muted: #94a3b8;
-                --primary: #38bdf8;
-                --primary-hover: #0ea5e9;
-                --border-color: #334155;
-                --input-bg: #0f172a;
-                --leyenda-bg: #111827;
-            }
-        }
-
-        @media (prefers-color-scheme: light) {
-            :root {
-                --bg-color: #f4f6f9;
-                --card-bg: #ffffff;
-                --text-main: #333333;
-                --text-muted: #666666;
-                --primary: #0056b3;
-                --primary-hover: #004494;
-                --border-color: #dee2e6;
-                --input-bg: #ffffff;
-                --leyenda-bg: #f8f9fa;
-            }
-        }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: #f4f6f9;
+            color: #333333;
             margin: 0;
             padding: 20px;
             font-size: 16px;
             display: flex;
             flex-direction: column;
             min-height: 90vh;
-            transition: background 0.3s ease, color 0.3s ease;
         }
-
         .container {
             max-width: 650px;
             margin: 20px auto;
-            background: var(--card-bg);
+            background: #ffffff;
             padding: 35px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid var(--border-color);
+            border: 1px solid #dee2e6;
             flex-grow: 1;
             box-sizing: border-box;
         }
-
         h2 {
             text-align: center;
-            color: var(--primary);
+            color: #0056b3;
             font-size: 24px;
             margin-bottom: 5px;
             font-weight: 700;
             letter-spacing: -0.02em;
         }
-
         p.subtitle {
             text-align: center;
-            color: var(--text-muted);
+            color: #666666;
             margin-bottom: 30px;
             font-size: 14px;
         }
-
         label {
             display: block;
             margin-top: 20px;
             font-weight: 600;
-            color: var(--text-main);
+            color: #333333;
             font-size: 14px;
         }
-
         input[type="text"], select, textarea, input[type="file"] {
             width: 100%;
             padding: 12px 14px;
             margin-top: 6px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #dee2e6;
             border-radius: 8px;
             font-size: 15px;
             box-sizing: border-box;
-            background-color: var(--input-bg);
-            color: var(--text-main);
+            background-color: #ffffff;
+            color: #333333;
         }
-
         input:focus, select:focus, textarea:focus {
-            border-color: var(--primary);
+            border-color: #0056b3;
             outline: none;
         }
-
         input[type="file"] {
             padding: 10px;
             cursor: pointer;
         }
-
         .nota-archivo {
             font-size: 13px;
-            color: var(--text-muted);
+            color: #666666;
             margin-top: 5px;
         }
-
         .leyenda-urgencia {
-            background-color: var(--leyenda-bg);
-            border: 1px solid var(--border-color);
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
             padding: 12px 15px;
             border-radius: 8px;
             margin-top: 8px;
             font-size: 13px;
-            color: var(--text-muted);
+            color: #666666;
         }
-
         .leyenda-urgencia div {
             margin-bottom: 4px;
         }
         .leyenda-urgencia div:last-child {
             margin-bottom: 0;
         }
-
         button {
             width: 100%;
-            background-color: var(--primary);
+            background-color: #0056b3;
             color: white;
             border: none;
             padding: 14px;
@@ -142,9 +101,8 @@
             transition: background 0.2s;
         }
         button:hover {
-            background-color: var(--primary-hover);
+            background-color: #004494;
         }
-
         #mensaje-exito {
             display: none;
             background-color: rgba(16, 185, 129, 0.1);
@@ -159,9 +117,8 @@
             font-size: 22px;
             margin: 0 0 10px 0;
         }
-
         .folio-box {
-            background: var(--card-bg);
+            background: #ffffff;
             padding: 10px;
             border: 2px dashed #10b981;
             font-size: 20px;
@@ -170,15 +127,13 @@
             margin: 15px 0;
             border-radius: 6px;
         }
-
-        /* --- PIE DE PÁGINA CON LOGOTIPO Y AUTORÍA --- */
         .system-footer {
             max-width: 650px;
             margin: 40px auto 10px auto;
             text-align: center;
             padding: 20px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
+            border-top: 1px solid #dee2e6;
+            color: #666666;
             font-size: 12px;
             display: flex;
             flex-direction: column;
@@ -187,22 +142,20 @@
             box-sizing: border-box;
             width: 100%;
         }
-
         .footer-brand {
             display: flex;
             align-items: center;
             gap: 10px;
             font-weight: bold;
-            color: var(--text-main);
+            color: #333333;
+            justify-content: center;
         }
-
         .footer-logo-img {
-            height: 32px;
-            width: auto;
-            object-fit: contain;
+            max-width: 20px;
+            height: auto;
+            display: block;
             border-radius: 4px;
         }
-
         @media print {
             body { background: white !important; color: black !important; padding: 0; }
             .container { box-shadow: none; border: none; }
@@ -217,11 +170,10 @@
     <p class="subtitle">Complete el formulario para registrar una solicitud formal de soporte técnico.</p>
 
     <form id="ticketForm">
-        <!-- Campo oculto para enviar el número de ticket por correo -->
-        <input type="hidden" id="numeroTicketInput" name="Numero_de_Ticket">
+        <input type="hidden" id="numeroTicketInput" name="Numero_de_Ticket" />
 
         <label for="nombre">Nombre del Solicitante:</label>
-        <input type="text" id="nombre" name="nombre" required placeholder="Ej. Juan Pérez">
+        <input type="text" id="nombre" name="nombre" required placeholder="Ej. Juan Pérez" />
 
         <label for="depto">Dirección o Departamento:</label>
         <select id="depto" name="direccion" required>
@@ -237,7 +189,7 @@
         </select>
 
         <label for="inventario">Número de Inventario del Equipo (Hardware/Activo):</label>
-        <input type="text" id="inventario" name="inventario" required placeholder="Ej. INV-04521">
+        <input type="text" id="inventario" name="inventario" required placeholder="Ej. INV-04521" />
 
         <label for="urgencia">Nivel de Prioridad / Urgencia:</label>
         <select id="urgencia" name="urgencia" required>
@@ -257,13 +209,13 @@
         <textarea id="descripcion" name="descripcion" rows="4" required placeholder="Describa el inconveniente técnico presentado..."></textarea>
 
         <label for="adjunto">Evidencia Fotográfica o Captura (Opcional):</label>
-        <input type="file" id="adjunto" name="adjunto" accept="image/*">
+        <input type="file" id="adjunto" name="adjunto" accept="image/*" />
         <div class="nota-archivo">Adjunte archivo gráfico si la incidencia lo requiere.</div>
 
         <button type="submit" id="btnEnviar">Generar Solicitud de Soporte</button>
     </form>
 
-    <div id="mensaje-exito">
+    <div id="mensaje-exito" style="display:none;">
         <h3>¡Solicitud Registrada Exitosamente!</h3>
         <p style="margin: 5px 0;">Su número de ticket asignado para seguimiento es:</p>
         <div class="folio-box" id="textoFolio">DT-IT-000</div>
@@ -271,75 +223,71 @@
     </div>
 </div>
 
-<!-- Pie de página con tu logotipo y autoría -->
 <footer class="system-footer">
     <div class="footer-brand">
-        <img src="logo.jpeg" alt="Logo" class="footer-logo-img">
+        <img src="logo.jpeg" alt="Logo" class="footer-logo-img" />
         <span>Marvin Leonel Luna Garcia</span>
     </div>
     <div>Sistema desarrollado para supervisión y gestión institucional de IT • GUATEL</div>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"></script>
+
 <script>
-    // Generar número de ticket correlativo (Inicia en 957 y se reinicia tras el 999)
+    const firebaseConfig = {
+      apiKey: "AIzaSyCzn27eEKxuPL2LqKac9F_Bn1kJV4jPaFE",
+      authDomain: "ticketsit-6a11f.firebaseapp.com",
+      projectId: "ticketsit-6a11f",
+      storageBucket: "ticketsit-6a11f.firebasestorage.app",
+      messagingSenderId: "495722204239",
+      appId: "1:495722204239:web:13e1f8e0c8978828e5ae3a"
+    };
+    
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
     function obtenerSiguienteCorrelativo() {
-        let ultimoNumero = parseInt(localStorage.getItem('ultimoCorrelativoIT'));
-
-        if (isNaN(ultimoNumero) || ultimoNumero < 956 || ultimoNumero >= 999) {
-            ultimoNumero = 956;
-        }
-
-        let nuevoNumero = ultimoNumero + 1;
-        localStorage.setItem('ultimoCorrelativoIT', nuevoNumero);
-        
-        let numeroFormateado = String(nuevoNumero).padStart(3, '0');
-        return `DT-IT-${numeroFormateado}`;
+      let ultimoNumero = parseInt(localStorage.getItem('ultimoCorrelativoIT'));
+      if (isNaN(ultimoNumero) || ultimoNumero < 956 || ultimoNumero >= 999) {
+          ultimoNumero = 956;
+      }
+      let nuevoNumero = ultimoNumero + 1;
+      localStorage.setItem('ultimoCorrelativoIT', nuevoNumero);
+      return `DT-IT-${String(nuevoNumero).padStart(3, '0')}`;
     }
 
     const nroTicket = obtenerSiguienteCorrelativo();
     document.getElementById('numeroTicketInput').value = nroTicket;
 
     const form = document.getElementById('ticketForm');
-    
     form.addEventListener('submit', function(e) {
-        e.preventDefault();
+      e.preventDefault();
+      const btn = document.getElementById('btnEnviar');
+      btn.innerText = "Registrando solicitud...";
+      btn.disabled = true;
 
-        const btn = document.getElementById('btnEnviar');
-        btn.innerText = "Registrando solicitud...";
-        btn.disabled = true;
+      const nuevoTicket = {
+        id: nroTicket,
+        nombre: document.getElementById('nombre').value,
+        depto: document.getElementById('depto').value,
+        inventario: document.getElementById('inventario').value,
+        urgencia: document.getElementById('urgencia').value,
+        descripcion: document.getElementById('descripcion').value,
+        estado: 'Pendiente',
+        fecha: new Date().toLocaleString()
+      };
 
-        const formData = new FormData(form);
-
-        fetch("https://formspree.io/f/xeaqjqjl", {
-            method: "POST",
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then(response => {
-            const nuevoTicket = {
-                id: nroTicket,
-                nombre: document.getElementById('nombre').value,
-                depto: document.getElementById('depto').value,
-                inventario: document.getElementById('inventario').value,
-                urgencia: document.getElementById('urgencia').value,
-                descripcion: document.getElementById('descripcion').value,
-                estado: 'Pendiente',
-                fecha: new Date().toLocaleString()
-            };
-
-            let tickets = JSON.parse(localStorage.getItem('ticketsSoporte')) || [];
-            tickets.unshift(nuevoTicket);
-            localStorage.setItem('ticketsSoporte', JSON.stringify(tickets));
-
-            document.getElementById('textoFolio').innerText = nroTicket;
-            form.style.display = 'none';
-            document.getElementById('mensaje-exito').style.display = 'block';
-
-        }).catch(error => {
-            alert("Hubo un error al registrar la solicitud. Por favor intente de nuevo.");
-            btn.innerText = "Generar Solicitud de Soporte";
-            btn.disabled = false;
+      db.collection('ticketsSoporte').add(nuevoTicket)
+        .then(() => {
+          document.getElementById('textoFolio').innerText = nroTicket;
+          form.style.display = 'none';
+          document.getElementById('mensaje-exito').style.display = 'block';
+        })
+        .catch(error => {
+          alert("Hubo un error al registrar la solicitud. Por favor intente de nuevo.");
+          btn.innerText = "Generar Solicitud de Soporte";
+          btn.disabled = false;
         });
     });
 </script>

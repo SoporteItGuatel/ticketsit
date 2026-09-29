@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Panel de Administración - Solicitudes de Soporte</title>
     <style>
-        /* Definición de Variables según el tema del dispositivo del usuario */
+        /* Estilos base y variables */
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg-color: #0f172a;
@@ -18,7 +18,6 @@
                 --table-hover: #1a2536;
             }
         }
-
         @media (prefers-color-scheme: light) {
             :root {
                 --bg-color: #f4f6f9;
@@ -154,7 +153,6 @@
             cursor: pointer;
         }
 
-        /* --- PIE DE PÁGINA CON LOGOTIPO Y AUTORÍA --- */
         .system-footer {
             max-width: 1200px;
             margin: 40px auto 10px auto;
@@ -177,11 +175,12 @@
             gap: 10px;
             font-weight: bold;
             color: var(--text-main);
+            justify-content: center;
         }
 
         .footer-logo-img {
-            height: 32px;
-            width: auto;
+            max-width: 20px;
+            height: auto;
             object-fit: contain;
             border-radius: 4px;
         }
@@ -224,23 +223,43 @@
     </table>
 </div>
 
-<!-- Pie de página con tu logotipo y autoría -->
 <footer class="system-footer">
     <div class="footer-brand">
-        <img src="logo.jpeg" alt="Logo" class="footer-logo-img">
+        <img src="logo.jpeg" alt="Logo" class="footer-logo-img" />
         <span>Marvin Leonel Luna Garcia</span>
     </div>
     <div>Sistema desarrollado para supervisión y gestión institucional de IT • GUATEL</div>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"></script>
+
 <script>
-    function cargarTickets() {
-        const ticketsGuardados = JSON.parse(localStorage.getItem('ticketsSoporte')) || [];
+  const firebaseConfig = {
+    apiKey: "AIzaSyCzn27eEKxuPL2LqKac9F_Bn1kJV4jPaFE",
+    authDomain: "ticketsit-6a11f.firebaseapp.com",
+    projectId: "ticketsit-6a11f",
+    storageBucket: "ticketsit-6a11f.firebasestorage.app",
+    messagingSenderId: "495722204239",
+    appId: "1:495722204239:web:13e1f8e0c8978828e5ae3a"
+  };
+
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  function cargarTickets() {
+    db.collection('ticketsSoporte').orderBy('fecha', 'desc').get()
+      .then(querySnapshot => {
+        const ticketsGuardados = [];
+        querySnapshot.forEach(doc => {
+          ticketsGuardados.push({idDoc: doc.id, ...doc.data()});
+        });
+
         const tbody = document.getElementById('tabla-cuerpo');
-        
+
         if (ticketsGuardados.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 30px;">No hay solicitudes registradas todavía.</td></tr>`;
-            return;
+          tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 30px;">No hay solicitudes registradas todavía.</td></tr>`;
+          return;
         }
 
         tbody.innerHTML = '';
@@ -258,7 +277,7 @@
                 <td><span class="badge ${badgeClass}">${t.urgencia}</span></td>
                 <td>${t.descripcion}</td>
                 <td>
-                    <select class="select-estado" onchange="cambiarEstado(${index}, this.value)">
+                    <select class="select-estado" onchange="cambiarEstado('${t.idDoc}', this.value)">
                         <option value="Pendiente" ${t.estado === 'Pendiente' ? 'selected' : ''}>⏳ Pendiente</option>
                         <option value="En Proceso" ${t.estado === 'En Proceso' ? 'selected' : ''}>🛠️ En Proceso</option>
                         <option value="Resuelto" ${t.estado === 'Resuelto' ? 'selected' : ''}>✅ Resuelto</option>
@@ -267,17 +286,20 @@
             `;
             tbody.appendChild(tr);
         });
-    }
+      })
+      .catch(error => {
+        console.error("Error cargando tickets desde Firebase:", error);
+      });
+  }
 
-    function cambiarEstado(index, nuevoEstado) {
-        let tickets = JSON.parse(localStorage.getItem('ticketsSoporte')) || [];
-        if (tickets[index]) {
-            tickets[index].estado = nuevoEstado;
-            localStorage.setItem('ticketsSoporte', JSON.stringify(tickets));
-        }
-    }
+  function cambiarEstado(docId, nuevoEstado) {
+    if(!docId) return;
+    db.collection('ticketsSoporte').doc(docId).update({ estado: nuevoEstado })
+      .then(() => cargarTickets())
+      .catch(console.error);
+  }
 
-    window.addEventListener('DOMContentLoaded', cargarTickets);
+  window.addEventListener('DOMContentLoaded', cargarTickets);
 </script>
 
 </body>

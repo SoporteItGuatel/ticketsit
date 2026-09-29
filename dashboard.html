@@ -1,43 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dashboard Gerencial — GUATEL Helpdesk</title>
     <style>
-        /* Definición de Variables según el tema del dispositivo del usuario */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --sidebar-bg: #111827;
-                --sidebar-text: #f3f4f6;
-                --topbar-bg: #1f2937;
-                --body-bg: #0f172a;
-                --card-bg: #1e293b;
-                --text-main: #f8fafc;
-                --text-muted: #94a3b8;
-                --border-color: #334155;
-                --brand-color: #38bdf8;
-                --table-hover: #1a2536;
-                --toolbar-bg: #111827;
-                --input-bg: #0f172a;
-            }
-        }
-
-        @media (prefers-color-scheme: light) {
-            :root {
-                --sidebar-bg: #1f2937;
-                --sidebar-text: #ffffff;
-                --topbar-bg: #ffffff;
-                --body-bg: #f3f4f6;
-                --card-bg: #ffffff;
-                --text-main: #111827;
-                --text-muted: #6b7280;
-                --border-color: #e5e7eb;
-                --brand-color: #0284c7;
-                --table-hover: #f8fafc;
-                --toolbar-bg: #fafafa;
-                --input-bg: #ffffff;
-            }
+        /* Variables de color y estilos base (puedes poner más estilos si quieres) */
+        :root {
+            --sidebar-bg: #1f2937;
+            --sidebar-text: #ffffff;
+            --topbar-bg: #ffffff;
+            --body-bg: #f3f6f9;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --brand-color: #0284c7;
+            --table-hover: #f8f9fa;
+            --toolbar-bg: #fafafa;
+            --input-bg: #ffffff;
         }
 
         body {
@@ -49,10 +30,8 @@
             height: 100vh;
             overflow: hidden;
             font-size: 14px;
-            transition: background 0.3s ease, color 0.3s ease;
         }
 
-        /* Barra Lateral */
         aside {
             width: 260px;
             background-color: var(--sidebar-bg);
@@ -103,7 +82,6 @@
             color: var(--text-muted);
         }
 
-        /* Contenedor Principal */
         .main-content {
             flex-grow: 1;
             display: flex;
@@ -111,7 +89,6 @@
             overflow-y: auto;
         }
 
-        /* Barra Superior */
         topbar {
             background-color: var(--topbar-bg);
             border-bottom: 1px solid var(--border-color);
@@ -157,7 +134,6 @@
             font-size: 13px;
         }
 
-        /* Cuerpo del Dashboard */
         .dashboard-body {
             padding: 30px;
             max-width: 1400px;
@@ -181,7 +157,6 @@
             font-weight: 600;
         }
 
-        /* Tarjetas de Métricas KPI */
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -212,7 +187,6 @@
             color: var(--text-main);
         }
 
-        /* Gráficos de Urgencia */
         .grafico-container {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -266,7 +240,6 @@
         .barra-amarillo { background-color: #f59e0b; }
         .barra-verde { background-color: #10b981; }
 
-        /* Filtros y Tabla */
         .card-table-container {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -359,7 +332,6 @@
             cursor: pointer;
         }
 
-        /* Tabla Estilo Dinámico */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -407,7 +379,6 @@
             font-family: monospace;
         }
 
-        /* --- PIE DE PÁGINA CON LOGOTIPO DE IMAGEN REAL --- */
         .system-footer {
             max-width: 1400px;
             margin: 40px auto 10px auto;
@@ -431,40 +402,15 @@
         }
 
         .footer-logo-img {
-            height: 32px;
-            width: auto;
+            max-width: 20px;
+            height: auto;
             object-fit: contain;
             border-radius: 4px;
-        }
-
-        .print-header {
-            display: none;
-        }
-
-        /* --- CONFIGURACIÓN DE IMPRESIÓN Y PDF EN MODO HORIZONTAL (LANDSCAPE) --- */
-        @media print {
-            @page {
-                size: landscape;
-                margin: 10mm;
-            }
-
-            body { background: white !important; color: black !important; height: auto; overflow: visible; display: block; font-size: 11px; }
-            aside, topbar, .table-toolbar, .btn-action { display: none; }
-            .main-content { overflow: visible; padding: 0; display: block; width: 100%; max-width: 100%; }
-            .card-table-container, .grafico-container, .metric-card { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; color: black !important; width: 100%; box-sizing: border-box; }
-            
-            table { width: 100% !important; border-collapse: collapse; table-layout: auto !important; }
-            th, td { padding: 10px 8px !important; font-size: 11px !important; word-wrap: break-word !important; white-space: normal !important; }
-
-            th { background-color: #eee !important; color: #000 !important; }
-            .print-header { display: block; text-align: center; margin-bottom: 20px; color: black; }
-            .system-footer { border-top: 2px solid #333; color: #333; margin-top: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Barra Lateral Dinámica -->
     <aside>
         <div class="sidebar-brand">
             GUATEL <span>Executive</span>
@@ -478,12 +424,10 @@
         </div>
     </aside>
 
-    <!-- Contenedor Principal -->
     <div class="main-content">
-        <!-- Topbar -->
         <topbar>
             <div class="topbar-search">
-                <input type="text" id="buscadorTabla" placeholder="Buscar ticket, usuario o inventario..." onkeyup="filtrarDatosGeneral()">
+                <input type="text" id="buscadorTabla" placeholder="Buscar ticket, usuario o inventario..." onkeyup="filtrarDatosGeneral()" />
             </div>
             <div class="topbar-user">
                 <div class="user-avatar">GM</div>
@@ -491,7 +435,6 @@
             </div>
         </topbar>
 
-        <!-- Cuerpo del Dashboard -->
         <div class="dashboard-body">
             
             <div class="print-header">
@@ -504,7 +447,6 @@
                 <button class="btn-action" onclick="generarPDF()">🖨️ Exportar Reporte PDF</button>
             </div>
 
-            <!-- Tarjetas de Métricas KPI -->
             <div class="metrics-grid">
                 <div class="metric-card">
                     <span>Total Solicitudes</span>
@@ -524,7 +466,6 @@
                 </div>
             </div>
 
-            <!-- Gráficos de Distribución por Urgencia -->
             <div class="grafico-container">
                 <div class="section-title">Distribución por Nivel de Urgencia</div>
                 
@@ -559,7 +500,6 @@
                 </div>
             </div>
 
-            <!-- Tabla de Auditoría con Filtros -->
             <div class="card-table-container">
                 <div class="table-toolbar">
                     <div class="filter-tabs">
@@ -571,9 +511,9 @@
 
                     <div class="filtros-box">
                         <label>Desde:</label>
-                        <input type="date" id="filtroDesde" onchange="filtrarDatosGeneral()">
+                        <input type="date" id="filtroDesde" onchange="filtrarDatosGeneral()" />
                         <label>Hasta:</label>
-                        <input type="date" id="filtroHasta" onchange="filtrarDatosGeneral()">
+                        <input type="date" id="filtroHasta" onchange="filtrarDatosGeneral()" />
                         <button class="btn-secundario" onclick="limpiarFiltrosFechas()">Limpiar</button>
                     </div>
                 </div>
@@ -596,153 +536,169 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
 
-        <!-- Pie de página con tu logotipo en imagen real y autoría -->
         <footer class="system-footer">
             <div class="footer-brand">
-                <img src="logo.jpeg" alt="Logo" class="footer-logo-img">
+                <img src="logo.jpeg" alt="Logo" class="footer-logo-img" />
                 <span>Marvin Leonel Luna Garcia</span>
             </div>
             <div>Sistema desarrollado para supervisión y gestión institucional de IT • GUATEL</div>
         </footer>
     </div>
 
-<script>
-    let ticketsGlobales = [];
-    let estadoFiltroActual = 'Todos';
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"></script>
 
-    function cargarHelpdesk() {
-        ticketsGlobales = JSON.parse(localStorage.getItem('ticketsSoporte')) || [];
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCzn27eEKxuPL2LqKac9F_Bn1kJV4jPaFE",
+    authDomain: "ticketsit-6a11f.firebaseapp.com",
+    projectId: "ticketsit-6a11f",
+    storageBucket: "ticketsit-6a11f.firebasestorage.app",
+    messagingSenderId: "495722204239",
+    appId: "1:495722204239:web:13e1f8e0c8978828e5ae3a"
+  };
+
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  
+  let ticketsGlobales = [];
+  let estadoFiltroActual = 'Todos';
+
+  function cargarHelpdesk() {
+    db.collection('ticketsSoporte').orderBy('fecha', 'desc').get()
+      .then(querySnapshot => {
+        ticketsGlobales = [];
+        querySnapshot.forEach(doc => {
+          ticketsGlobales.push(doc.data());
+        });
         actualizarKPIsYGraficos(ticketsGlobales);
         renderizarTabla(ticketsGlobales);
+      })
+      .catch(console.error);
+  }
+
+  function actualizarKPIsYGraficos(lista) {
+    const total = lista.length;
+    document.getElementById('kpiTotal').innerText = total;
+    document.getElementById('kpiPendientes').innerText = lista.filter(t => t.estado === 'Pendiente' || !t.estado).length;
+    document.getElementById('kpiProceso').innerText = lista.filter(t => t.estado === 'En Proceso').length;
+    document.getElementById('kpiResueltos').innerText = lista.filter(t => t.estado === 'Resuelto').length;
+
+    let urgente = lista.filter(t => t.urgencia === 'Urgente').length;
+    let medio = lista.filter(t => t.urgencia === 'Medio').length;
+    let leve = lista.filter(t => t.urgencia === 'Leve').length;
+
+    let pUrgente = total > 0 ? Math.round((urgente / total) * 100) : 0;
+    let pMedio = total > 0 ? Math.round((medio / total) * 100) : 0;
+    let pLeve = total > 0 ? Math.round((leve / total) * 100) : 0;
+
+    document.getElementById('txtUrgente').innerText = `${urgente} (${pUrgente}%)`;
+    document.getElementById('barraUrgente').style.width = `${pUrgente}%`;
+
+    document.getElementById('txtMedio').innerText = `${medio} (${pMedio}%)`;
+    document.getElementById('barraMedio').style.width = `${pMedio}%`;
+
+    document.getElementById('txtLeve').innerText = `${leve} (${pLeve}%)`;
+    document.getElementById('barraLeve').style.width = `${pLeve}%`;
+  }
+
+  function renderizarTabla(lista) {
+    const tbody = document.getElementById('tablaHelpdesk');
+    tbody.innerHTML = '';
+
+    if (lista.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 40px;">No hay registros que coincidan con los filtros aplicados.</td></tr>`;
+      return;
     }
 
-    function actualizarKPIsYGraficos(lista) {
-        const total = ticketsGlobales.length;
+    lista.forEach(t => {
+      let badgeEstado = 'badge-pendiente';
+      let estadoTexto = t.estado || 'Pendiente';
+      if (estadoTexto === 'En Proceso') badgeEstado = 'badge-proceso';
+      if (estadoTexto === 'Resuelto') badgeEstado = 'badge-resuelto';
 
-        document.getElementById('kpiTotal').innerText = total;
-        document.getElementById('kpiPendientes').innerText = ticketsGlobales.filter(t => t.estado === 'Pendiente' || !t.estado).length;
-        document.getElementById('kpiProceso').innerText = ticketsGlobales.filter(t => t.estado === 'En Proceso').length;
-        document.getElementById('kpiResueltos').innerText = ticketsGlobales.filter(t => t.estado === 'Resuelto').length;
+      let badgeUrgencia = '';
+      if (t.urgencia === 'Urgente') badgeUrgencia = 'badge-urgente';
 
-        let urgente = ticketsGlobales.filter(t => t.urgencia === 'Urgente').length;
-        let medio = ticketsGlobales.filter(t => t.urgencia === 'Medio').length;
-        let leve = ticketsGlobales.filter(t => t.urgencia === 'Leve').length;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+          <td><strong>${t.id || 'S/N'}</strong></td>
+          <td style="color: var(--text-muted);">${t.fecha || 'Reciente'}</td>
+          <td><strong>${t.nombre}</strong></td>
+          <td>${t.depto}</td>
+          <td><code>${t.inventario || 'N/A'}</code></td>
+          <td><span class="badge ${badgeUrgencia}">${t.urgencia}</span></td>
+          <td style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${t.descripcion}">${t.descripcion}</td>
+          <td><span class="badge ${badgeEstado}">${estadoTexto}</span></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
 
-        let pUrgente = total > 0 ? Math.round((urgente / total) * 100) : 0;
-        let pMedio = total > 0 ? Math.round((medio / total) * 100) : 0;
-        let pLeve = total > 0 ? Math.round((leve / total) * 100) : 0;
+  function filtrarEstadoTab(estado, elementoBtn) {
+    estadoFiltroActual = estado;
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    elementoBtn.classList.add('active');
+    filtrarDatosGeneral();
+  }
 
-        document.getElementById('txtUrgente').innerText = `${urgente} (${pUrgente}%)`;
-        document.getElementById('barraUrgente').style.width = `${pUrgente}%`;
+  function filtrarDatosGeneral() {
+    const textoBusqueda = document.getElementById('buscadorTabla').value.toLowerCase();
+    const desde = document.getElementById('filtroDesde').value;
+    const hasta = document.getElementById('filtroHasta').value;
 
-        document.getElementById('txtMedio').innerText = `${medio} (${pMedio}%)`;
-        document.getElementById('barraMedio').style.width = `${pMedio}%`;
+    const filtrados = ticketsGlobales.filter(t => {
+      const matchTexto = (t.id && t.id.toLowerCase().includes(textoBusqueda)) ||
+                         (t.nombre && t.nombre.toLowerCase().includes(textoBusqueda)) ||
+                         (t.inventario && t.inventario.toLowerCase().includes(textoBusqueda)) ||
+                         (t.descripcion && t.descripcion.toLowerCase().includes(textoBusqueda));
 
-        document.getElementById('txtLeve').innerText = `${leve} (${pLeve}%)`;
-        document.getElementById('barraLeve').style.width = `${pLeve}%`;
-    }
+      const matchEstado = estadoFiltroActual === 'Todos' || (t.estado || 'Pendiente') === estadoFiltroActual;
 
-    function renderizarTabla(lista) {
-        const tbody = document.getElementById('tablaHelpdesk');
-        tbody.innerHTML = '';
+      let matchFecha = true;
+      if (desde || hasta) {
+        if (!t.fecha) {
+          matchFecha = false;
+        } else {
+          let fechaPartes = t.fecha.split(',')[0].trim();
+          let partesFechaArray = fechaPartes.split('/');
 
-        if (lista.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 40px;">No hay registros que coincidan con los filtros aplicados.</td></tr>`;
-            return;
+          if (partesFechaArray.length === 3) {
+            let [dia, mes, anio] = partesFechaArray;
+            let mesFormat = mes.padStart(2, '0');
+            let diaFormat = dia.padStart(2, '0');
+            let fechaTicketStr = `${anio}-${mesFormat}-${diaFormat}`;
+
+            if (desde && fechaTicketStr < desde) matchFecha = false;
+            if (hasta && fechaTicketStr > hasta) matchFecha = false;
+          } else {
+            matchFecha = false;
+          }
         }
+      }
 
-        lista.forEach(t => {
-            let badgeEstado = 'badge-pendiente';
-            let estadoTexto = t.estado || 'Pendiente';
-            if (estadoTexto === 'En Proceso') badgeEstado = 'badge-proceso';
-            if (estadoTexto === 'Resuelto') badgeEstado = 'badge-resuelto';
+      return matchTexto && matchEstado && matchFecha;
+    });
 
-            let badgeUrgencia = '';
-            if (t.urgencia === 'Urgente') badgeUrgencia = 'badge-urgente';
+    renderizarTabla(filtrados);
+  }
 
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td><strong>${t.id || 'S/N'}</strong></td>
-                <td style="color: var(--text-muted);">${t.fecha || 'Reciente'}</td>
-                <td><strong>${t.nombre}</strong></td>
-                <td>${t.depto}</td>
-                <td><code>${t.inventario || 'N/A'}</code></td>
-                <td><span class="badge ${badgeUrgencia}">${t.urgencia}</span></td>
-                <td style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${t.descripcion}">${t.descripcion}</td>
-                <td><span class="badge ${badgeEstado}">${estadoTexto}</span></td>
-            `;
-            tbody.appendChild(tr);
-        });
-    }
+  function limpiarFiltrosFechas() {
+    document.getElementById('filtroDesde').value = '';
+    document.getElementById('filtroHasta').value = '';
+    filtrarDatosGeneral();
+  }
 
-    function filtrarEstadoTab(estado, elementoBtn) {
-        estadoFiltroActual = estado;
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        elementoBtn.classList.add('active');
-        filtrarDatosGeneral();
-    }
+  function generarPDF() {
+    const ahora = new Date();
+    const formatoFechaHora = ahora.toLocaleString('es-GT', { dateStyle: 'full', timeStyle: 'medium' });
+    document.getElementById('fechaImpresion').innerText = `Reporte gerencial emitido oficialmente el: ${formatoFechaHora}`;
+    window.print();
+  }
 
-    function filtrarDatosGeneral() {
-        const textoBusqueda = document.getElementById('buscadorTabla').value.toLowerCase();
-        const desde = document.getElementById('filtroDesde').value;
-        const hasta = document.getElementById('filtroHasta').value;
-
-        const filtrados = ticketsGlobales.filter(t => {
-            const matchTexto = (t.id && t.id.toLowerCase().includes(textoBusqueda)) ||
-                               (t.nombre && t.nombre.toLowerCase().includes(textoBusqueda)) ||
-                               (t.inventario && t.inventario.toLowerCase().includes(textoBusqueda)) ||
-                               (t.descripcion && t.descripcion.toLowerCase().includes(textoBusqueda));
-            
-            const matchEstado = estadoFiltroActual === 'Todos' || (t.estado || 'Pendiente') === estadoFiltroActual;
-
-            let matchFecha = true;
-            if (desde || hasta) {
-                if (!t.fecha) {
-                    matchFecha = false;
-                } else {
-                    let fechaPartes = t.fecha.split(',')[0].trim();
-                    let partesFechaArray = fechaPartes.split('/');
-                    
-                    if (partesFechaArray.length === 3) {
-                        let [dia, mes, anio] = partesFechaArray;
-                        let mesFormat = mes.padStart(2, '0');
-                        let diaFormat = dia.padStart(2, '0');
-                        let fechaTicketStr = `${anio}-${mesFormat}-${diaFormat}`;
-
-                        if (desde && fechaTicketStr < desde) matchFecha = false;
-                        if (hasta && fechaTicketStr > hasta) matchFecha = false;
-                    } else {
-                        matchFecha = false;
-                    }
-                }
-            }
-
-            return matchTexto && matchEstado && matchFecha;
-        });
-
-        renderizarTabla(filtrados);
-    }
-
-    function limpiarFiltrosFechas() {
-        document.getElementById('filtroDesde').value = '';
-        document.getElementById('filtroHasta').value = '';
-        filtrarDatosGeneral();
-    }
-
-    function generarPDF() {
-        const ahora = new Date();
-        const formatoFechaHora = ahora.toLocaleString('es-GT', { 
-            dateStyle: 'full', 
-            timeStyle: 'medium' 
-        });
-        document.getElementById('fechaImpresion').innerText = `Reporte gerencial emitido oficialmente el: ${formatoFechaHora}`;
-        window.print();
-    }
-
-    window.addEventListener('DOMContentLoaded', cargarHelpdesk);
+  window.addEventListener('DOMContentLoaded', cargarHelpdesk);
 </script>
 
 </body>
